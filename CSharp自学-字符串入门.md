@@ -1,4 +1,4 @@
-## C# 自学笔记 第二单元-字符串
+## C# 自学笔记 第二章-字符串
 
 来源于: [Learn C# 初级自学教程](https://learn.microsoft.com/zh-cn/users/dotnet/collections/yz26f8y64n7k07?WT.mc_id=dotnet-35129-website),微软推出的初学者教程整理。
 
