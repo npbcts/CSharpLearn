@@ -59,8 +59,6 @@ int firstName="Bob";
 (2,9): error CS0029: Cannot implicitly convert type 'string' to 'int'
 ```
 
-
-
 ### 检索存储在变量中的值
 若要从变量中检索值，只需使用变量的名称。 此示例将设置变量的值，然后检索该值并将其打印到控制台。
 ```c#
