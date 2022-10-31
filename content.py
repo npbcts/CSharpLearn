@@ -32,7 +32,7 @@ def content(content_name):
 
 
 if __name__ == '__main__':
-    content_name = 'csharp笔记-~目录.md'
+    content_name = 'csharp笔记-0000目录.md'
     if os.path.exists(content_name):
         os.remove(content_name)
     save_text('## CSharpLearn笔记目录\n', content_name)
