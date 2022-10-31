@@ -38,3 +38,4 @@ if __name__ == '__main__':
     save_text('## CSharpLearn笔记目录\n', content_name)
     save_text('\n\n### 前言部分\n', content_name)
     content(content_name)
+    print('目录生成成功!')

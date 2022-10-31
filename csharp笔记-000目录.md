@@ -14,7 +14,7 @@
 7. [csharp笔记-104字符串内置方法](csharp笔记-104字符串内置方法.md)  
 8. [csharp笔记-105变量基础知识](csharp笔记-105变量基础知识.md)  
 9. [csharp笔记-106数值操作](csharp笔记-106数值操作.md)  
-10. [csharp笔记-107](csharp笔记-107.net类库.md)  
+10. [csharp笔记-107dotnet类库](csharp笔记-107dotnet类库.md)  
 11. [csharp笔记-108if语句](csharp笔记-108if语句.md)  
 12. [csharp笔记-109数组和foreach](csharp笔记-109数组和foreach.md)  
 13. [csharp笔记-110编程规范](csharp笔记-110编程规范.md)  
