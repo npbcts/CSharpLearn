@@ -1,37 +1,56 @@
-﻿Random dice = new Random();
-int roll1 = dice.Next(1, 7);
-int roll2 = dice.Next(1, 7);
-int roll3 = dice.Next(1, 7);
-int total = roll1 + roll2 + roll3;
-Console.WriteLine($"Dice roll: {roll1} + {roll2} + {roll3} = {total}");
+﻿using System;
 
-if (roll1==roll2 || roll3==roll2 || roll1==roll3)
+namespace MyNewApp
 {
-    if ((roll1==roll2) && (roll2==roll3))
+    class Program
     {
-        Console.WriteLine("You rolled doubles! +6 bonus to total!");
-        total += 6;
+        static void Main(string[] args)
+        {
+            string value = "Microsoft Learn";
+
+            // 下面是不同的namespace调用方法
+            string reversedValue = MyNewApp.Utilities.Utility.Reverse(value);
+            Console.WriteLine($"Secret message: {reversedValue}");
+
+            // 下面是同类class中调用方法
+            string addValue = AddStr(value);
+            Console.WriteLine($"AddStr :{addValue}");
+
+            // 下面是不同类调用
+            string judgeResult = JudgeWord.JudgeWordInSentence(value, "Learn");
+            Console.WriteLine($"JudgeWorld Class: {judgeResult}");
+        }
+
+        static string AddStr(string message)
+        {
+            message = message + ": change with method AddStr";
+            return message;
+        }
     }
-    else
+
+    class JudgeWord
     {
-    Console.WriteLine("You rolled doubles! +2 bonus to total!");
-    total += 2;
+        public static string JudgeWordInSentence(string message, string theword)
+        {
+            string containResult = "";
+            if (message.Contains(theword))
+                containResult = "is";
+            else
+                containResult = "is not";
+            return $"sentence {containResult} contains word {theword}";
+        }
     }
 }
 
-if (total >= 16)
+namespace MyNewApp.Utilities
 {
-    Console.WriteLine("You win a new car!");
-}
-else if (total >= 10)
-{
-    Console.WriteLine("You win a laptop!");
-}
-else if (total >= 7)
-{
-    Console.WriteLine("You win a trip!");
-}
-else
-{
-    Console.WriteLine("You win a kittem!");
+    class Utility
+    {
+        public static string Reverse(string message)
+        {
+            char[] letters = message.ToCharArray();
+            Array.Reverse(letters);
+            return new string(letters);
+        }
+    }
 }

@@ -46,10 +46,13 @@ Hello World!
 ### [顶级语句 - 不使用 Main 方法的程序](https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/program-structure/top-level-statements)
 以下两种写法等同:
 
+第一种c#代码简单写法:
 ```c#
 Console.WriteLine("Hello, World!");
 ```
+**注意,在第一部分的学习完全可以使用上面这种写法完成学习，而无需了解第二种更复杂的写法。** 第二种更复杂的C#写法将在第二部分笔记中解释如何运行并帮助我们编写出更完善的应用软件。
 
+第二种c#代码写法:
 ```c#
 namespace HelloWorld
 {

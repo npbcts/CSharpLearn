@@ -25,7 +25,7 @@ def content(content_name):
             session_index_tmp = int(chapter_index[0])
             if session_index != session_index_tmp:
                 session_index = session_index_tmp
-                save_text(f'\n\n### 第 {section_dic.get(session_index)} 部分\n', content_name)
+                save_text(f'\n\n### 第{section_dic.get(session_index)}部分\n', content_name)
             index += 1
             chapter_text = f"{index}. [{file.split('.')[0]}]({file})  \n"
             save_text(chapter_text, content_name)
