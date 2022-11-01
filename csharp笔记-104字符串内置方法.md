@@ -33,3 +33,5 @@ Console.Write(input.PadLeft(12, '*'));
 ```
 输出结果:
 `****Pad this`
+
+(End)

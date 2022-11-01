@@ -2,15 +2,6 @@
 
 - 来源于: [Learn C# 初级自学教程](https://learn.microsoft.com/zh-cn/training/modules/csharp-write-first/),微软推出的初学者教程整理。
 
-- 练习环境: 在线网页版 .NET 编辑器
-
-
-### 学习目标
-通过学习本章，你将能够：
-
-- 编写第一批 C# 代码
-- 使用两种不同的技术将消息打印到文本控制台
-- 识别运算符、类和方法等不同 C# 语法元素
 
 ### 练习 -“Hello World!”
 
@@ -43,7 +34,7 @@ Hello World!
 “语句”是 C# 中的完整指令。 分号指示编译器我们已经完成了命令的输入。
 
 
-### [顶级语句 - 不使用 Main 方法的程序](https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/program-structure/top-level-statements)
+###了解内容： [顶级语句 - 不使用 Main 方法的程序](https://learn.microsoft.com/zh-cn/dotnet/csharp/fundamentals/program-structure/top-level-statements)
 以下两种写法等同:
 
 第一种c#代码简单写法:
@@ -115,3 +106,5 @@ namespace MyNamespace
 ```
 
 [顶级语句更详细的文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/language-reference/proposals/csharp-9.0/top-level-statements)
+
+(End)

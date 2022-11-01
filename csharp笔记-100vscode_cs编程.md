@@ -30,3 +30,6 @@ Console.WriteLine("Hello, World!");
 dotnet run
 ```
 程序显示“Hello World!”并终止。
+
+
+(End)

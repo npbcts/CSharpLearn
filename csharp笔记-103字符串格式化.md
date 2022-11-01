@@ -44,3 +44,5 @@ Console.WriteLine($"Tax rate: {tax:P2}");
 ```c#
 Tax rate: 36.79 %
 ```
+
+(End)

@@ -93,3 +93,5 @@ decimal celsius = (fahrenheit - 32m) * (5m / 9m);
 Console.WriteLine("The temperature is " + celsius + " Celsius.");
 ```
 注意进行除法及其他运算时, 所有数值(包括变量)转换为decimal.这种写代码显性转换是比较保守的准确做法，不再探究不同数据类型的数值进行运算的结果是否准确。
+
+(End)
