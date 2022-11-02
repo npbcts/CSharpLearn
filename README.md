@@ -1,6 +1,8 @@
 # CsharpLearn
 C# 学习笔记
 
+此学习笔记基于`C#11`, `.NET6`和`.Net Core`。
+
 ### [笔记目录](csharp笔记-000目录.md)说明:
 
 第一部分 [前言](csharp笔记-000目录.md#前言部分)  
