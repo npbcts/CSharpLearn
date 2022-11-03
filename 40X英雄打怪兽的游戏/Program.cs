@@ -16,7 +16,7 @@
 */
 using System;
 
-# TODO: 添加武器, 铠甲等道具
+// TODO: 添加武器, 铠甲等道具
 
 namespace MyNewApp
 {
@@ -37,6 +37,8 @@ namespace MyNewApp
                 "牛魔王", "金角大王", "银角大王", "啸天犬", "二郎神", "奔波儿灞", "灞波儿奔"};
             int[] 怪物等级 = {1, 2, 2, 2, 1, 3, 4, 5, 5,
                 6, 5, 4, 4, 7, 3, 3}; //对应怪物名称
+            if (怪物名称.Length != 怪物等级.Length)
+                Console.WriteLine("怪物列表名称和等级匹配!");
             do
             {
                 do
@@ -56,9 +58,9 @@ namespace MyNewApp
                     }
                 }
                 else if (游戏动作 == "v")
-                    查看.查看角色状态(悟空);
+                    悟空.状态();
                 else if (游戏动作 == "r")
-                    休息.回生命值(悟空, 5, 0);
+                    悟空.休息(5, 0);
             } while(游戏动作!="q");
          
         }
@@ -80,42 +82,50 @@ namespace MyNewApp
         }
         public string 角色名称;
         public int 角色等级;
-        public int 角色生命值;
-        public int 角色生命力;
         public int 角色物理攻击力;
         public int 角色魔法攻击力;
         public int 角色物理防御;
         public int 角色魔法防御;
-    }
-    
-    class 查看
-    {
-        public static void 查看角色状态(角色 一个角色)
+
+        public int 角色生命值;
+
+
+        private int 角色生命力_内;
+        public int 角色生命力
         {
-            int 新等级 = (int)(一个角色.角色生命力/20);
-            if ( 新等级 > 一个角色.角色等级)
+            get
             {
-                一个角色.角色等级 = 新等级;
-                Console.WriteLine("恭喜 {一个角色.角色名称} 升级");
+                return this.角色生命力_内;
             }
-            Console.WriteLine($"~~~~~~~~~~~~~~~~~{一个角色.角色名称} 的状态情况:");
-            Console.Write($"生命值 : {一个角色.角色生命值}/{一个角色.角色生命力};");
-            Console.Write($"\t等级 : {一个角色.角色等级};");
-            Console.Write($"\t物理攻击力 : {一个角色.角色物理攻击力};");
-            Console.Write($"\t魔法攻击力 : {一个角色.角色魔法攻击力};");
-            Console.Write($"\t物理防御  : {一个角色.角色物理防御};");
-            Console.Write($"\t魔法防御 : {一个角色.角色魔法防御};");
-            Console.WriteLine($"~~~~~~~~~~~~~~~~~{一个角色.角色名称} 的状态情况:");
+            set
+            {
+                this.角色生命力_内 = value;
+                int 新等级 = (int)(this.角色生命力_内/20);
+                if ( 新等级 > this.角色等级)
+                    {
+                        this.角色等级 = 新等级;
+                        Console.WriteLine($"恭喜 {this.角色名称} 升级");
+                    }
+            }
         }
-    }
-    class 休息
-    {
-        public static void 回生命值(角色 角色一, int 生命值恢复, int 魔法值恢复)
+
+        public void 状态()
         {
-            角色一.角色生命值 += 生命值恢复;
-            if (角色一.角色生命值 > 角色一.角色生命力)
-                角色一.角色生命值 = 角色一.角色生命力;
-            Console.WriteLine($"{角色一.角色名称} 生命值恢复 {生命值恢复}");
+            Console.WriteLine($"~~~~~~~~~~~~~~~~~{this.角色名称} 的状态情况:");
+            Console.Write($"生命值 : {this.角色生命值}/{this.角色生命力}");
+            Console.Write($"\t等级 : {this.角色等级}");
+            Console.Write($"\t物理攻击力 : {this.角色物理攻击力}");
+            Console.Write($"\t魔法攻击力 : {this.角色魔法攻击力}");
+            Console.Write($"\t物理防御  : {this.角色物理防御}");
+            Console.Write($"\t魔法防御 : {this.角色魔法防御}\n");
+        }
+
+        public void 休息(int 生命值恢复, int 魔法值恢复)
+        {
+            this.角色生命值 += 生命值恢复*this.角色等级;
+            if (this.角色生命值 > this.角色生命力)
+                this.角色生命值 = this.角色生命力;
+            Console.WriteLine($"{this.角色名称} 生命值恢复 {生命值恢复*this.角色等级}");
         }
     }
     class 战斗类
@@ -178,21 +188,25 @@ namespace MyNewApp
             角色 怪物 = new 角色(怪物名称, 怪物等级);
             
             Console.WriteLine($"在山脚,遇到一个怪物 {怪物名称} 举刀向我...");
-            查看.查看角色状态(怪物);
-            Console.Write("\n是否战斗,y(战斗),e(逃跑):");
-            string 是否继续战斗 = Console.ReadLine();
-            // Console.WriteLine(是否继续战斗);
-            while(是否继续战斗 == "y")  // ascii y->121
+            怪物.状态();
+            string 是否继续战斗 = "";
+            string result = "";
+            do
             {
-                是否继续战斗 = "";
-                string result = 战斗类.一回合战斗(英雄, 怪物, 怪物等级);
-
-                while((是否继续战斗!="y" && 是否继续战斗!="e" && result!="End"))
+                while((是否继续战斗!="y" && 是否继续战斗!="e"))
                 {
                     Console.Write("\n是否继续战斗y(战斗),e(逃跑):");
                     是否继续战斗 = Console.ReadLine();
                 } 
-            } 
+                if (是否继续战斗 == "y")
+                {
+                    result = 战斗类.一回合战斗(英雄, 怪物, 怪物等级);
+                }
+                if (result == "End")
+                {
+                    break;
+                }
+            } while(是否继续战斗 == "y");
 
             if (是否继续战斗 == "e")  // ascii e->101
             {
