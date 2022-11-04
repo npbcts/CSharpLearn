@@ -33,24 +33,28 @@ namespace MyNewApp
             Console.WriteLine("今天奉如来菩萨之托护送师傅西天求取真经...");
             string 游戏动作 = "";
             Random rnd = new Random();
-            string[] 怪物名称 = {"普通山怪", "蝎子精", "虾兵", "蟹将","小钻风", "蚂蚱精", "蜘蛛精", "黑熊精", "铁扇公主", 
-                "牛魔王", "金角大王", "银角大王", "啸天犬", "二郎神", "奔波儿灞", "灞波儿奔"};
-            int[] 怪物等级 = {1, 2, 2, 2, 1, 3, 4, 5, 5,
-                6, 5, 4, 4, 7, 3, 3}; //对应怪物名称
-            if (怪物名称.Length != 怪物等级.Length)
-                Console.WriteLine("怪物列表名称和等级匹配!");
+            Dictionary<string, int> 怪物名称及等级表 = new Dictionary<string, int>
+                {
+                    {"普通山怪", 1}, {"蝎子精", 2}, {"虾兵", 2}, {"蟹将", 2}, {"小钻风", 1}, {"蚂蚱精", 3},
+                    {"蜘蛛精", 4}, {"黑熊精", 5}, {"铁扇公主", 5},{"牛魔王", 6}, {"金角大王", 5}, {"银角大王", 4},
+                    {"啸天犬", 4}, {"二郎神", 7}, {"奔波儿灞", 3}, {"灞波儿奔", 3}
+
+                };
+
             do
             {
                 do
                 {
-                Console.Write($"\n请输入游戏动作f(进入战斗), v(观察英雄状态), r(休息), q(退出游戏): ");
-                游戏动作 = Console.ReadLine();
-                } while(!("fvrq".Contains(游戏动作)));
+                    Console.Write($"\n输入-> f(战斗), v(观察英雄状态), r(休息), b(查看背包), q(退出游戏): ");
+                    var result = Console.ReadLine();
+                    游戏动作 = result != null? result: "";
+                } while(!("fvrbq".Contains(游戏动作)));
 
                 if (游戏动作 == "f")
                 {
-                    int 随机数 = rnd.Next(1, (怪物名称.Length+1));
-                    战斗类.随机战斗(悟空, 怪物名称[随机数], 怪物等级[随机数]);
+                    int 随机数 = rnd.Next(0, (怪物名称及等级表.Count));  // 数组超界限?
+                    string 怪物名称 = 怪物名称及等级表.Keys.ToList()[随机数];  // 使用 Dictionary.Keys.ToList()方法，将KeysCollection类型转换为数组，以便使用数索引
+                    战斗类.随机战斗(悟空, 怪物名称, 怪物名称及等级表[怪物名称]);
                     if (悟空.角色生命值 <= 0)
                     {
                         Console.WriteLine($"{悟空.角色名称} 在战斗中遭受了重创,永远地离开了我们....");
@@ -61,6 +65,8 @@ namespace MyNewApp
                     悟空.状态();
                 else if (游戏动作 == "r")
                     悟空.休息(5, 0);
+                else if (游戏动作 == "b")
+                    悟空.查看背包();
             } while(游戏动作!="q");
          
         }
@@ -79,6 +85,7 @@ namespace MyNewApp
             this.角色物理防御 = 角色等级*3;  //角色物理攻防御;
             this.角色魔法攻击力 = 角色等级*5;  //角色魔法攻击力;
             this.角色魔法防御 = 角色等级*1;  //角色魔法攻防御;
+
         }
         public string 角色名称;
         public int 角色等级;
@@ -86,21 +93,20 @@ namespace MyNewApp
         public int 角色魔法攻击力;
         public int 角色物理防御;
         public int 角色魔法防御;
-
         public int 角色生命值;
+        
 
-
-        private int 角色生命力_内;
+        private int 角色生命力_私有;
         public int 角色生命力
         {
             get
             {
-                return this.角色生命力_内;
+                return this.角色生命力_私有;
             }
             set
             {
-                this.角色生命力_内 = value;
-                int 新等级 = (int)(this.角色生命力_内/20);
+                this.角色生命力_私有 = value;
+                int 新等级 = (int)(this.角色生命力_私有/20);
                 if ( 新等级 > this.角色等级)
                     {
                         this.角色等级 = 新等级;
@@ -127,6 +133,47 @@ namespace MyNewApp
                 this.角色生命值 = this.角色生命力;
             Console.WriteLine($"{this.角色名称} 生命值恢复 {生命值恢复*this.角色等级}");
         }
+        private static Dictionary<string, int> 布衣属性 = new Dictionary<string, int>{{"角色物理防御", 1},};
+        static 装备 布衣 = new 装备("布衣", 布衣属性);
+        public Dictionary<装备, int> 角色背包 = new Dictionary<装备, int>{{布衣, 1}};
+
+        public void 获得装备(装备 获得的装备)
+        {
+            int 装备数量_临时 = 0;
+            if (this.角色背包.Keys.Contains(获得的装备))  // value -> 装备
+                装备数量_临时 = this.角色背包[获得的装备] + 1;
+            else
+                装备数量_临时 = 1;
+            this.角色背包.Add(获得的装备, 装备数量_临时);
+        }
+
+        public void 查看背包()
+        {
+            Console.WriteLine($"~~~~~~~~~~~~~~~~~ {this.角色名称} 背包装备列表:");
+            foreach (KeyValuePair<装备, int> 背包装备临时 in this.角色背包)
+            {
+                Console.Write($"{背包装备临时.Key.装备名称}, 拥有数量 {背包装备临时.Value}:");
+                foreach (KeyValuePair<string, int> 装备属性 in 背包装备临时.Key.属性)
+                {
+                    Console.Write($"装备: {装备属性.Key} +{装备属性.Value};");
+                }
+                Console.Write("\n");
+            }
+        }
+        // public void 添加装备(装备 装备名)
+        // {
+
+        // }
+    }
+    class 装备
+    {
+        public 装备(string 装备名称, Dictionary<string, int> 属性组)
+        {
+            this.装备名称 = 装备名称;
+            this.属性 = new Dictionary<string, int>(属性组);
+        }
+        public string 装备名称;
+        public Dictionary<string, int> 属性;
     }
     class 战斗类
     {
@@ -161,6 +208,10 @@ namespace MyNewApp
 
                     int 物理防御增加值 = 1*怪物等级;
                     英雄.角色物理防御 +=物理防御增加值;
+                    
+                    Dictionary<string, int> 怪物掉落的装备属性 = new Dictionary<string, int>{{"物理攻击力", 50}, {"角色生命力", 50}};
+                    装备 怪物掉落的装备 = new 装备("定海神针", 怪物掉落的装备属性);
+                    英雄.获得装备(怪物掉落的装备);
                     Console.WriteLine($"获胜奖励: 角色生命力 +{生命力增加值}, 物理攻击力 +{物理攻击力增加值}, 物理防御 +{物理防御增加值}");
                     return "End";
                 }
@@ -184,19 +235,25 @@ namespace MyNewApp
 
         public static void 随机战斗(角色 英雄, string 怪物名称, int 怪物等级)
         {
+
             // 触发随即战斗事件
             角色 怪物 = new 角色(怪物名称, 怪物等级);
             
             Console.WriteLine($"在山脚,遇到一个怪物 {怪物名称} 举刀向我...");
             怪物.状态();
-            string 是否继续战斗 = "";
+            string 是否继续战斗 = "INITSTRING";
             string result = "";
             do
             {
-                while((是否继续战斗!="y" && 是否继续战斗!="e"))
+                while(!"ye".Contains(是否继续战斗))
                 {
-                    Console.Write("\n是否继续战斗y(战斗),e(逃跑):");
-                    是否继续战斗 = Console.ReadLine();
+                    Console.Write("\n是否继续战斗y(战斗),v(查看英雄状态),e(逃跑):");
+                    是否继续战斗 = Console.ReadLine().ToString();
+                    // 是否继续战斗 = consoleResult != null? consoleResult: "";
+                    if (是否继续战斗 == "v")
+                    {
+                        英雄.状态();
+                    }
                 } 
                 if (是否继续战斗 == "y")
                 {
@@ -212,6 +269,7 @@ namespace MyNewApp
             {
                 Console.WriteLine("我一个筋斗云十万八千里,避开了妖怪的追杀...好险!");
             }
+
         }
 
     }
