@@ -73,6 +73,8 @@ namespace MyNewApp
 
     }
 
+    // 创建基本角色，之后衍生出人物角色和装备角色，两个都具有名称，等级各种攻击和防御能力
+    // 装备角色没有动作，只有属性
     class 角色
     {
         public 角色(string 角色名称, int 角色等级)
@@ -135,35 +137,49 @@ namespace MyNewApp
         }
         private static Dictionary<string, int> 布衣属性 = new Dictionary<string, int>{{"角色物理防御", 1},};
         static 装备 布衣 = new 装备("布衣", 布衣属性);
-        public Dictionary<装备, int> 角色背包 = new Dictionary<装备, int>{{布衣, 1}};
+        public Dictionary<装备, int> 背包 = new Dictionary<装备, int>{{布衣, 1}};
 
-        public void 获得装备(装备 获得的装备)
+        private static Dictionary<string, int> 木棍属性 = new Dictionary<string, int>{{"角色物理攻击", 1},};
+        static 装备 木棍 = new 装备("木棍", 木棍属性);
+        public Dictionary<装备, int> 穿戴装备 = new Dictionary<装备, int>{{木棍, 1}};
+
+        public void 获得或减少装备(装备 获得的装备, int 装备数量)
         {
             int 装备数量_临时 = 0;
-            if (this.角色背包.Keys.Contains(获得的装备))  // value -> 装备
-                装备数量_临时 = this.角色背包[获得的装备] + 1;
+            if (this.背包.Keys.Contains(获得的装备))  // value -> 装备
+                装备数量_临时 = this.背包[获得的装备] + 装备数量;
             else
                 装备数量_临时 = 1;
-            this.角色背包.Add(获得的装备, 装备数量_临时);
+            this.背包.Add(获得的装备, 装备数量_临时);
         }
 
         public void 查看背包()
         {
-            Console.WriteLine($"~~~~~~~~~~~~~~~~~ {this.角色名称} 背包装备列表:");
-            foreach (KeyValuePair<装备, int> 背包装备临时 in this.角色背包)
+            查看装备集合(this.背包, "背包");
+        }
+        private void 查看装备集合(Dictionary<装备, int> 装备集合, string 集合名称)
+        {
+            Console.WriteLine($"~~~~~~~~~~~~~~~~~ {this.角色名称} {集合名称} 装备列表:");
+
+            int index = 0;
+            foreach (KeyValuePair<装备, int> 背包装备临时 in 装备集合)
             {
-                Console.Write($"{背包装备临时.Key.装备名称}, 拥有数量 {背包装备临时.Value}:");
+                Console.Write($"{index}. {背包装备临时.Key.装备名称.PadRight(10)}, 拥有数量 {背包装备临时.Value}:");
                 foreach (KeyValuePair<string, int> 装备属性 in 背包装备临时.Key.属性)
                 {
                     Console.Write($"装备: {装备属性.Key} +{装备属性.Value};");
                 }
+                index ++;
                 Console.Write("\n");
             }
-        }
-        // public void 添加装备(装备 装备名)
-        // {
 
-        // }
+        }
+        public void 添加装备(int 序号)
+        {
+            装备 添加装备;
+            this.背包.Remove(this.背包.Keys[序号])
+
+        }
     }
     class 装备
     {
@@ -211,7 +227,7 @@ namespace MyNewApp
                     
                     Dictionary<string, int> 怪物掉落的装备属性 = new Dictionary<string, int>{{"物理攻击力", 50}, {"角色生命力", 50}};
                     装备 怪物掉落的装备 = new 装备("定海神针", 怪物掉落的装备属性);
-                    英雄.获得装备(怪物掉落的装备);
+                    英雄.获得或减少装备(怪物掉落的装备, 1);
                     Console.WriteLine($"获胜奖励: 角色生命力 +{生命力增加值}, 物理攻击力 +{物理攻击力增加值}, 物理防御 +{物理防御增加值}");
                     return "End";
                 }
