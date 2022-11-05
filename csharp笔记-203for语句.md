@@ -16,13 +16,33 @@ for (int i = 0; i < 10; i++)
 }
 ```
 
-同样是代码块执行10次循环，使用foreach的替代写法:
+同样是代码块执行10次循环，**使用foreach的替代写法**:
 ```c#
 int[] array = new int[10];
 foreach (int i in array)
 {
     Console.WriteLine("something");
 }
+```
+另一种**使用foreach的替代写法**,这里使用了`Enumerable.Range`,类似于`Python`的`range`方法，但有不同。
+```c#
+foreach (int n in Enumerable.Range(0, 10))
+{
+    Console.WriteLine($"something: {n}");
+}
+```
+浓重的`Python`风格。输出结果:
+```
+something: 0
+something: 1
+something: 2
+something: 3
+something: 4
+something: 5
+something: 6
+something: 7
+something: 8
+something: 9
 ```
 
 `for`语句的语法:

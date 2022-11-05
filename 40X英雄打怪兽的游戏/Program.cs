@@ -75,9 +75,10 @@ namespace MyNewApp
 
     // 创建基本角色，之后衍生出人物角色和装备角色，两个都具有名称，等级各种攻击和防御能力
     // 装备角色没有动作，只有属性
-    class 角色
+  
+    class 人物角色: 太极
     {
-        public 角色(string 角色名称, int 角色等级)
+        public 人物角色(string 角色名称, int 角色等级, 角色等级*20)
         {
             this.角色名称 = 角色名称;
             this.角色等级 = 角色等级;
@@ -290,4 +291,116 @@ namespace MyNewApp
 
     }
     
+
+
+      class 太极
+    {
+        // 太极是一切事物演变的基础，其他事物可以从太极继承
+         public 太极(
+            string 类别, string 名称, int 等级=0, int 生命值=0, 
+            int 生命力=0, int 物理攻击力=0, int 物理防御=0, int 魔法攻击力=0, int 魔法防御=0)
+        {
+            this.类别 = 类别;
+            this.名称 = 名称;
+            this.等级 = 等级;
+            this.生命值 = 生命值;  // 生命值会随着使用或被攻击而下降
+            this.生命力 = 生命力;  //生命总长度，随着修炼增加;
+            this.物理攻击力 = 物理攻击力;  //物理攻击力, 可以修炼等级提升或武器加持增加;
+            this.物理防御 = 物理防御;  //物理攻防御, 可以修炼等级提升或武器加持增加;
+            this.魔法攻击力 = 魔法攻击力;  //魔法攻击力, 可以修炼等级提升或武器加持增加;
+            this.魔法防御 = 魔法防御;  //魔法攻防御, 可以修炼等级提升或武器加持增加;
+
+        }
+        private string 类别私有;
+        protected string 类别  // protected保护的属性,类继承时才能修改, 外部实例化时无法修改
+        {
+            get{return this.类别私有;}
+            set{this.类别私有 = value;}
+        }
+
+        private string 名称私有;
+        public string 名称
+        {
+            get{return this.名称私有;}
+            set{
+                this.名称私有 = value;
+                }
+        }
+
+        private int 等级私有;
+        public int 等级
+        {
+            get{return this.等级私有;}
+            set{this.等级私有 = value;}
+        }
+
+        private int 物理攻击力私有;
+        public int 物理攻击力
+        {
+            get{return this.物理攻击力私有;}
+            set{this.物理攻击力私有 = value;}
+        }
+
+        private int 魔法攻击力私有;
+        public int 魔法攻击力
+        {
+            get{return this.魔法攻击力;}
+            set{this.魔法攻击力 = value;}
+        }
+
+        private int 物理防御私有;
+        public int 物理防御
+        {
+            get{return this.物理防御;}
+            set{this.物理防御 = value;}
+        }
+        private int 魔法防御私有;
+        public int  魔法防御
+        {
+            get{return this.魔法防御;}
+            set{this.魔法防御 = value;}
+        }
+        private int 生命值私有;
+        public int 生命值
+        {
+            get{return this.生命值;}
+            set
+            {
+                if (value <0)  // 生命值不能低于0
+                {
+                    value = 0;
+                }
+                this.生命值 = value;
+            }
+        }
+        private int 生命力私有;
+        public veriul int 生命力  // 可被继承类重写的属性
+        {
+            get{return this.生命力;}
+            set{this.生命力 = value;}
+        }
+
+        public void 状态()
+        {
+            Console.WriteLine($"~~~~~~~~~~~~~~~~~{this.名称} 的状态情况:");
+            Console.Write($"生命值 : {this.生命值}/{this.生命力}");
+            Console.Write($"\t等级 : {this.等级}");
+            Console.Write($"\t物理攻击力: {this.物理攻击力}");
+            Console.Write($"\t魔法攻击力: {this.魔法攻击力}");
+            Console.Write($"\t物理防御: {this.物理防御}");
+            Console.Write($"\t魔法防御: {this.魔法防御}\n");
+        }
+
+        public void 恢复(int 生命值恢复)
+        {
+            this.生命值 += 生命值恢复;
+            if (this.生命值 > this.生命力)
+            {
+                this.生命值 = this.生命力;
+                Console.WriteLine($"{this.名称} 生命值恢复至最高!");
+                }
+            Console.WriteLine($"{this.名称} 生命值恢复 {生命值恢复}");
+        }
+
+    }
 }
