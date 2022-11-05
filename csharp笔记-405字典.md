@@ -1,6 +1,6 @@
 ## C# 自我初学笔记 第N章  字典初始化
 
-来源于: [Learn C# 初级自学教程](https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/how-to-initialize-a-dictionary-with-a-collection-initializer),微软推出的初学者教程整理。
+来源于: 根据[微软的.Net6文档](https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/how-to-initialize-a-dictionary-with-a-collection-initializer)整理。
 
 
 ### 字典特性
