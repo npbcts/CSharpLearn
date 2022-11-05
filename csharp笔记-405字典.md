@@ -6,7 +6,7 @@
 ### 字典特性
 
 - 属于System.Collection.Generic命名空间
-- Dictionary<TKey, TValue> 存储键值对，键值对元素存储为 KeyValuePair <TKey，TValue> 对象，Dictionary里面每一个元素都是以键值对的形式存在的
+- Dictionary<TKey, TValue> 存储键值对的集合，键值对元素存储为 KeyValuePair <TKey，TValue> 对象，Dictionary里面每一个元素都是以键值对的形式存在的
 - 键必须是唯一的，不能为null
 - 值可以为null或重复
 - 键和值都可以以任何数据类型存在（比如：值类型、引用类型、自定义类型等等）
@@ -15,9 +15,7 @@
 
 字典数据类型由于查找速度快，数据之间对应关系明确，被广泛使用在各种编程语言中。
 
-下面的例子是，在学生信息数据中查找三年二班`小花`的信息的例子。
-
-使用数组查找学生三年二班学生`小花`的例子：
+下面的例子是，在学生信息数据中查找三年二班`小花`的信息的例子：
 ```c#
 public class GetStudent
 {
@@ -103,7 +101,8 @@ public class GetStudent
 
 ### 迭代字典中的键值对
 
-键值对元素存储为 `KeyValuePair <TKey，TValue> `对象，我们可以使用`foreach`循环语句迭代字典中的值。
+键值对元素存储为 `KeyValuePair <TKey，TValue> `对象，我们可以使用`foreach`循环语句迭代字典中的值。由于是 Dictionary<TKey,TValue> 键和值的集合，因此元素类型不是键的类型或值的类型。 相反，元素类型是 KeyValuePair<TKey,TValue> 键类型和值类型。
+迭代过程中，返回项的顺序未定义。 
 
 ```c#
 public class Students
@@ -130,6 +129,12 @@ public class Students
     }
 }
 
+```
+输出结果:
+```
+学生姓名：小花,性别: 女,语文分数: 90,数学分数: 95,
+学生姓名：小刚,性别: 男,语文分数: 80,数学分数: 90,
+学生姓名：小星,性别: 男,语文分数: 100,数学分数: 50,
 ```
 
 (End)
