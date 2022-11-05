@@ -2,6 +2,7 @@
 
 来源于: [Learn C# 初级自学教程](https://learn.microsoft.com/zh-cn/dotnet/csharp/programming-guide/classes-and-structs/how-to-initialize-a-dictionary-with-a-collection-initializer),微软推出的初学者教程整理。
 
+### Add方法初始化
 
 Dictionary<TKey,TValue> 包含键/值对集合。  
 若要初始化 Dictionary<TKey,TValue>,有如下方法 :
@@ -10,8 +11,6 @@ Dictionary<TKey,TValue> 包含键/值对集合。
 - 一种方法是将每组参数括在大括号中，如下面的示例中所示。 
 - 另一种方法是使用索引初始值设定项，如下面的示例所示。
 
-
-### Add方法初始化
 
 将`students`变量声明`Dictionary<int, StudentName>()`类后，实际上为空字典。`Add`能为字典数据添加键值对。
 
@@ -108,5 +107,6 @@ public class HowToDictionaryInitializer
     }
 }
 ```
+
 
 (End)
