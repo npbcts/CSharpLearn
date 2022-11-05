@@ -61,7 +61,7 @@ Object[,] 三年二班学生 = new Object[3,4]
     {"小星", "男", 100, 50},
 };
 ```
-
+事实上，使用`Object`类作为数据类别不应该被使用，为数据创建单独的类是一个好的做法。
 
 使用字典查找学生三年二班学生`小花`的例子：
 ```c#
@@ -100,5 +100,36 @@ public class GetStudent
 [字典的初始化方法](csharp笔记-406字典的初始化.md)
 
 字典值的获取采用了`字典数据[字典键]`(`Item[TKey]`):	获取或设置与指定的键关联的值。这是一种获取和设置字典值的普遍方法。这种方法获取字典值存在缺陷，即当不存在`键`(`TKey`)时程序会抛出异常。当然，字典类型还有更安全的方法获取值。
+
+### 迭代字典中的键值对
+
+键值对元素存储为 `KeyValuePair <TKey，TValue> `对象，我们可以使用`foreach`循环语句迭代字典中的值。
+
+```c#
+public class Students
+{
+    public static void Main()
+    {
+        Dictionary<string, Dictionary<string, Object>> 三年二班学生 = new Dictionary<string, Dictionary<string, Object>>
+        {
+            {"小花", new Dictionary<string, Object>{{"性别", "女"}, {"语文分数", 90}, {"数学分数", 95}}},
+            {"小刚", new Dictionary<string, Object>{{"性别", "男"}, {"语文分数", 80}, {"数学分数", 90}}},
+            {"小星", new Dictionary<string, Object>{{"性别", "男"}, {"语文分数", 100}, {"数学分数", 50}}},
+
+        };
+
+        foreach (KeyValuePair<string, Dictionary<string, Object>> 学生 in 三年二班学生 )
+        {
+            Console.Write($"学生姓名：{学生.Key},");
+            foreach (KeyValuePair<string, Object> 学生信息 in 学生.Value)
+            {
+                Console.Write($"{学生信息.Key}: {学生信息.Value},");
+            }
+            Console.WriteLine();
+        }
+    }
+}
+
+```
 
 (End)

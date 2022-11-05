@@ -15,15 +15,15 @@
 8. [csharp笔记-105变量基础知识](csharp笔记-105变量基础知识.md)  
 9. [csharp笔记-106数值操作](csharp笔记-106数值操作.md)  
 10. [csharp笔记-107dotnet类库](csharp笔记-107dotnet类库.md)  
-11. [csharp笔记-108if语句](csharp笔记-108if语句.md)  
-12. [csharp笔记-109数组和foreach](csharp笔记-109数组和foreach.md)  
-13. [csharp笔记-110编程规范](csharp笔记-110编程规范.md)  
+11. [csharp笔记-108编程规范](csharp笔记-108编程规范.md)  
 
 
 ### 第二部分
-14. [csharp笔记-200逻辑运算](csharp笔记-200逻辑运算.md)  
-15. [csharp笔记-201代码块和变量范围](csharp笔记-201代码块和变量范围.md)  
-16. [csharp笔记-202swich语句](csharp笔记-202swich语句.md)  
+12. [csharp笔记-200逻辑运算](csharp笔记-200逻辑运算.md)  
+13. [csharp笔记-201if语句](csharp笔记-201if语句.md)  
+14. [csharp笔记-201代码块和变量范围](csharp笔记-201代码块和变量范围.md)  
+15. [csharp笔记-202swich语句](csharp笔记-202swich语句.md)  
+16. [csharp笔记-202数组和foreach](csharp笔记-202数组和foreach.md)  
 17. [csharp笔记-203for语句](csharp笔记-203for语句.md)  
 18. [csharp笔记-204while语句](csharp笔记-204while语句.md)  
 19. [csharp笔记-205英雄打怪兽的游戏](csharp笔记-205英雄打怪兽的游戏.md)  
@@ -37,5 +37,12 @@
 24. [csharp笔记-305字符串数组转换](csharp笔记-305字符串数组转换.md)  
 
 
+### 第四部分
+25. [csharp笔记-403字典的常用方法](csharp笔记-403字典的常用方法.md)  
+26. [csharp笔记-405字典](csharp笔记-405字典.md)  
+27. [csharp笔记-406字典的初始化](csharp笔记-406字典的初始化.md)  
+
+
 ### 练习程序列表
 1. [205英雄打怪兽的游戏](205英雄打怪兽的游戏)
+2. [40X英雄打怪兽的游戏](40X英雄打怪兽的游戏)
