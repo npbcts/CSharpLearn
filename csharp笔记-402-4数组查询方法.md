@@ -1,4 +1,4 @@
-## C# 自我初学笔记 第N章  数组方法属性
+## C# 自我初学笔记 第N章  数组查询方法
 
 来源于: 根据[微软的.Net6文档](https://learn.microsoft.com/zh-cn/dotnet/api/system.array?view=net-6.0)整理。本文只对常用的知识整理，更详细需要查看链接指向的文档。
 
@@ -6,13 +6,7 @@
 
 C#中的数组类型是从抽象的基类型 `Array` 派生的引用类型。因此我们根据使用数组时根据`Array`的方法进行。同时，要更深入理解C#数组的特性也要从`Array`开始。
 
-
-### `Array`的方法在c#中的实现
-
-数组的方法主要分为复制项目，删除项目，修改项目，查询项目和其他方法。
-
-
-####  >> 数组的查询方法
+###  数组的查询主要方法
 
 数组的查询方法较多，主要分为三类, `IndexOf`系列，`Find`系列和`GetValue`系列。
 - `IndexOf`: 系列通过数组的项目值获取对应的在数组中的索引。
@@ -20,7 +14,7 @@ C#中的数组类型是从抽象的基类型 `Array` 派生的引用类型。因
 - `GetValue`系列: 根据索引获取数组项目值。
 
 
-具体方法如下:
+### `IndexOf`系列方法
 
 - `IndexOf(Object)`: 确定 IList 中特定项的索引。
 - `IndexOf(Array, Object, Int32)`: 在一个一维数组的一系列元素中搜索指定对象，然后返回其首个匹配项的索引。 范围从指定索引到该数组结尾。  
@@ -52,6 +46,7 @@ Console.WriteLine($"搜索到数组项目最后符合的索引: {Array.LastIndex
 搜索到数组项目最后符合的索引: 2
 */
 ```
+### `Find`系列方法
 
 - `Find<T>(T[], Predicate<T>)`: 	
 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的第一个匹配元素。
@@ -98,12 +93,22 @@ studentsStartB Blue
 例子中搜索 `Predicate<T>` 条件使用了 `lambda` 表达式 `stu => stu.StartsWith("B")` 返回以 `B`开头的字符串。
 `Find<T>(T[], Predicate<T>)` 方法的多个重载方法让我们可以结合搜索范围、返回值的位置(开始还是结束位置)进行搜索，或者可以返回索引位置。
 
+### `GetValue`系列方法
 
 - `GetValue(Int32)`: 获取一维 Array 中指定位置的值。 索引指定为 32 位整数。
 - `GetValue(Int32, Int32)`: 获取二维 Array 中指定位置的值。 索引指定为 32 位整数。
 - `GetValue(Int64)`: 获取一维 Array 中指定位置的值。 索引指定为 64 位整数。
 - `GetValue(Int64, Int64)`: 获取二维 Array 中指定位置的值。 索引指定为 64 位整数。
 获取三维及多维数组项目值的方法在此不再列示，需要使用时可以查询文档。
+
+```c#
+string[] students = new string[] {"Luca", "Bob", "Luca", "Luke", "Blue", "Dinesh"};
+Console.WriteLine(students.GetValue(2));
+/*输出
+Luca
+*/
+```
+注意，当索引范围超出数组长度时，会抛出异常。
 
 
 (End)
