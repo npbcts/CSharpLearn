@@ -8,6 +8,25 @@
 
 `=>` 令牌支持两种形式：作为 `lambda` 运算符、作为成员名称的分隔符和表达式主体定义中的成员实现。
 
+表达式主体定义具有下列常规语法：
+```c#
+member => expression;
+```
+expression 必须是语句表达式。 由于表达式的结果被丢弃，该表达式的返回类型可以是任何类型。
+
+以下示例演示了用于 Person.ToString 方法的表达式主体定义：
+```c#
+public override string ToString() => $"{fname} {lname}".Trim();
+```
+
+它是以下方法定义的简写版：
+```c#
+public override string ToString()
+{
+   return $"{fname} {lname}".Trim();
+}
+```
+
 ### Lambda 表达式
 
 使用 `Lambda` 表达式来创建匿名函数。 使用 `lambda` 声明运算符 `=>` 从其主体中**分离 `lambda` 参数列表**。 任何 `Lambda` 表达式都可以转换为委托类型, 在此不做深入讨论。
@@ -66,11 +85,5 @@ Func<int, string, bool> isTooLong = (int x, string s) => s.Length > x;
 输入参数类型必须全部为显式或全部为隐式；否则，便会生成 CS0748 编译器错误。
 
 
-```c#
-
-```
-```c#
-
-```
 
 (End)

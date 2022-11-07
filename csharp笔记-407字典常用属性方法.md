@@ -4,56 +4,26 @@
 
 ### 字典的属性
 
-- `Comparer`	
-获取用于确定字典中的键是否相等的 IEqualityComparer<T>。
-
-- `Count`	
-获取包含在 `Dictionary<TKey,TValue>` 中的键/值对的数目。
-
-- `Item[TKey]`	
-获取或设置与指定的键关联的值。
-
-- `Keys`	
-获得一个包含 `Dictionary<TKey,TValue>` 中的键的集合。
-
-- `Values`	
-获得一个包含 `Dictionary<TKey,TValue>` 中的值的集合。
+- `Comparer`获取用于确定字典中的键是否相等的 IEqualityComparer<T>。
+- `Count`获取包含在 `Dictionary<TKey,TValue>` 中的键/值对的数目。
+- `Item[TKey]`获取或设置与指定的键关联的值。
+- `Keys`获得一个包含 `Dictionary<TKey,TValue>` 中的键的集合。
+- `Values`获得一个包含 `Dictionary<TKey,TValue>` 中的值的集合。
 
 
 ### 字典的常用方法
 
-- `Add(TKey, TValue)`：	
-将指定的键和值添加到字典中。
-
-- `Clear()`：	
-将所有键和值从 Dictionary<TKey,TValue> 中移除。
-
-- `ContainsKey(TKey)`：	
-确定是否 Dictionary<TKey,TValue> 包含指定键。
-
-- `ContainsValue(TValue)`：	
-确定 Dictionary<TKey,TValue> 是否包含特定值。
-
-- `GetHashCode()`：	
-作为默认哈希函数。
-
-- `GetType()`：	
-获取当前实例的 Type。
-
-- `Remove(TKey)`：	
-从 Dictionary<TKey,TValue> 中移除所指定的键的值。
-
-- `Remove(TKey, TValue)`：	
-从 Dictionary<TKey,TValue> 中删除具有指定键的值，并将元素复制到 value 参数。
-
-- `ToString()`：	
-返回表示当前对象的字符串。
-
-- `TryAdd(TKey, TValue)`：	
-尝试将指定的键和值添加到字典中。
-
-- `TryGetValue(TKey, TValue)`：	
-获取与指定键关联的值。
+- `Add(TKey, TValue)`：	将指定的键和值添加到字典中。
+- `Clear()`：	将所有键和值从 Dictionary<TKey,TValue> 中移除。
+- `ContainsKey(TKey)`：	确定是否 Dictionary<TKey,TValue> 包含指定键。
+- `ContainsValue(TValue)`：	确定 Dictionary<TKey,TValue> 是否包含特定值。
+- `GetHashCode()`：	作为默认哈希函数。
+- `GetType()`：	获取当前实例的 Type。
+- `Remove(TKey)`：	从 Dictionary<TKey,TValue> 中移除所指定的键的值。
+- `Remove(TKey, TValue)`：从 Dictionary<TKey,TValue> 中删除具有指定键的值，并将元素复制到 value 参数。
+- `ToString()`：	返回表示当前对象的字符串。
+- `TryAdd(TKey, TValue)`：	尝试将指定的键和值添加到字典中。
+- `TryGetValue(TKey, TValue)`：	获取与指定键关联的值。
 
 
 ### 向字典中添加键值对
@@ -159,7 +129,6 @@ public class SetDictValue
 获取某个键的值有两种方法, `Item[TKey]`, `TryGetValue(TKey, TValue)`。
 
 - `Item[TKey]`, 当已检索该属性且集合中不存在 `key` 时, 抛出 `KeyNotFoundException`。
-
 - `TryGetValue(TKey, TValue)`: 返回布尔值。当已检索该属性且集合中不存在 `key` 时, 返回`false`，否则返回 `true`。
 
 `TryGetValue(TKey, TValue)`方法获取字典值的例子:
@@ -185,6 +154,7 @@ public class GetDictValue
 ```
 True, 小明
 ```
+
 `TryGetValue(TKey, TValue)`方法获取字典值需要向方法传递`out`参数。
 
 `Item[TKey]`获取字典值的例子:
