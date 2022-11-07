@@ -92,7 +92,18 @@ int[] array3;
 array3 = new int[] { 1, 3, 5, 7, 9 };   // OK
 //array3 = {1, 3, 5, 7, 9};   // Error
 ```
+
+> `.NET` 支持不从零开始的数组, 可以使用该方法创建 `CreateInstance(Type, Int32[], Int32[])` 此类数组，
+
 ### 数组数据处理的常用方法
+
+#### 数组的复制
+
+- `Clone()`: [创建 Array 的浅表副本。](csharp笔记-402-2数组复制方法.md#clone方法)
+- `CopyTo(Array, Int32)`: 从指定的目标数组索引处开始，将当前一维数组的所有元素复制到指定的一维数组中。 索引指定为 32 位整数。
+- `Copy(Array, Array, Int32)`: 从第一个元素开始复制 `Array` 中的一系列元素，将它们粘贴到另一 `Array` 中（从第一个元素开始）。 长度指定为 32 位整数。
+- `Copy(Array, Int32, Array, Int32, Int32)`: 复制 `Array` 中的一系列元素（从指定的源索引开始），并将它们粘贴到另一 `Array` 中（从指定的目标索引开始）。 长度和索引指定为 32 位整数。
+- `ConvertAll<TInput,TOutput>(TInput[], Converter<TInput,TOutput>)`: 将一种类型的数组转换为另一种类型的数组。
 
 #### 增: 数组数据类型不能增加项目
 
@@ -102,6 +113,9 @@ C#数组继承了.NET中`Array`的特性:
 #### 删: 删除数组的项目
 
 数组数据类型不能删除项目，但能将已有项目删除至默认值。可以使用`IList.Clear()`移除所有或部分数组项目。
+
+- `Clear()`: [从 `IList` 中移除所有项。](csharp笔记-402-4数组移除及其他方法.md#数组的删除方法)
+- `Clear(Array, Int32, Int32)`: 将数组中的某个范围的元素设置为每个元素类型的默认值。
 
 #### 改: 修改数组项目
 
@@ -114,6 +128,23 @@ foreach (string student in students)
     Console.Write($"{student} ");
 }
 ```
+更复杂的数组修改方法:
+
+- `Reverse(Array)`: [反转整个一维 Array 中元素的顺序。](csharp笔记-402-3数组修改方法.md#数组的反转)
+- `Reverse(Array, Int32, Int32)`: 反转一维 Array 中元素子集的顺序。
+- `Reverse<T>(T[])`: 反转一维泛型数组中元素的顺序。
+- `Reverse<T>(T[], Int32, Int32)`: 反转一维泛型数组中元素子集的顺序。
+- `SetValue(Object, Int32)`: [将值设置为一维 Array 中指定位置的元素。 索引指定为 32 位整数。](csharp笔记-402-3数组修改方法.md#为数组设置值)
+- `SetValue(Object, Int32, Int32)`: 将某值设置给二维 Array 中指定位置的元素。 索引指定为 32 位整数。
+- `Sort(Array)`: [使用 Array 中每个元素的 IComparable 实现，对整个一维 Array 中的元素进行排序。](csharp笔记-402-3数组修改方法.md#数组排序)
+- `Sort(Array, Array)`: 基于第一个 Array 中的关键字，使用每个关键字的 IComparable 实现，对两个一维 Array 对象（一个包含关键字，另一个包含对应的项）进行排序。
+- `Sort(Array, Array, IComparer)`: 基于第一个 Array 中的关键字，使用指定的 IComparer，对两个一维 Array 对象（一个包含关键字，另一个包含对应的项）进行排序。
+- `Sort(Array, Array, Int32, Int32)	`: 基于第一个 Array 中的关键字，使用每个关键字的 IComparable 实现，对两个一维 Array 对象（一个包含关键字，另一个包含对应的项）的部分元素进行排序。
+- `Sort(Array, Array, Int32, Int32, IComparer)`: 基于第一个 Array 中的关键字，使用指定的 IComparer，对两个一维 Array 对象（一个包含关键字，另一个包含对应的项）的部分元素进行排序。
+- `Sort(Array, IComparer)`: 使用指定的 IComparer，对一维 Array 中的元素进行排序。
+- `Sort(Array, Int32, Int32)`: 使用 Array 中每个元素的 IComparable 实现，对一维 Array 中的部分元素进行排序。
+- `Sort(Array, Int32, Int32, IComparer)	`: 使用指定的 IComparer，对一维 Array 中的部分元素进行排序。
+`Resize<T>(T[], Int32)`： [将一维数组的元素数更改为指定的新大小。](csharp笔记-402-3数组修改方法.md#改变数组的大小)
 
 #### 查: 从数组中检索数据
 
@@ -134,6 +165,37 @@ Fri
 ```
 - 查询数组数据的另一种方法: [使用`foreach`循环读取数组](csharp笔记-202数组和foreach.md)
 
-数组更多的增删改查见下一篇笔记: 数组方法属性。
+更多的数组查询方法:
+
+- `IndexOf(Object)`: [确定 `IList` 中特定项的索引](csharp笔记-402-4数组查询方法.md#indexof系列方法)。
+- `IndexOf(Array, Object, Int32)`: 在一个一维数组的一系列元素中搜索指定对象，然后返回其首个匹配项的索引。 范围从指定索引到该数组结尾。  
+- `IndexOf(Array, Object, Int32, Int32)`: 在一个一维数组的一系列元素中搜索指定-对象，然后返回其首个匹配项的索引。 该元素系列的范围从指定数量的元素的指定索引开始。
+- `LastIndexOf(Array, Object)`: 在整个一维 Array 中搜索指定的对象，并返回最后一个匹配项的索引。
+- `LastIndexOf(Array, Object, Int32)`: 搜索指定的对象，并返回一维 Array 中从第一个元素到指定索引的元素范围内最后一个匹配项的索引。
+- `LastIndexOf(Array, Object, Int32, Int32)`: 搜索指定的对象并返回一维 Array 中包含指定数目元素且在指定索引处结尾的元素范围内的最后一个匹配项的索引。
+- `Find<T>(T[], Predicate<T>)`: [搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的第一个匹配元素。](csharp笔记-402-4数组查询方法.md#find系列方法)。
+- `Exists<T>(T[], Predicate<T>)`: 确定指定数组包含的元素是否与指定谓词定义的条件匹配。
+- `FindAll<T>(T[], Predicate<T>)`: 检索与指定谓词定义的条件匹配的所有元素。
+- `FindIndex<T>(T[], Int32, Int32, Predicate<T>)`: 	搜索与指定谓词所定义的条件相匹配的一个元素，并返回 Array 中从指定的索引开始、包含指定元素个数的元素范围内第一个匹配项的从零开始的索引。
+- `FindIndex<T>(T[], Int32, Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回 Array 中从指定索引到最后一个元素的元素范围内第一个匹配项的从零开始的索引。
+- `FindIndex<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中第一个匹配元素的从零开始的索引。
+- `FindLast<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的最后一个匹配元素。
+- `FindLastIndex<T>(T[], Int32, Int32, Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内最后一个匹配项的从零开始的索引。
+- `FindLastIndex<T>(T[], Int32, Predicate<T>)`: 搜索与由指定谓词定义的条件相匹配的元素，并返回 Array 中从第一个元素到指定索引的元素范围内最后一个匹配项的从零开始的索引。
+- `FindLastIndex<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中最后一个匹配元素的从零开始的索引。
+- `GetValue(Int32)`: [获取一维 Array 中指定位置的值。 索引指定为 32 位整数。](csharp笔记-402-4数组查询方法.md#getvalue系列方法)。
+- `GetValue(Int32, Int32)`: 获取二维 Array 中指定位置的值。 索引指定为 32 位整数。
+- `GetValue(Int64)`: 获取一维 Array 中指定位置的值。 索引指定为 64 位整数。
+- `GetValue(Int64, Int64)`: 获取二维 Array 中指定位置的值。 索引指定为 64 位整数。
+
+### 其他方法
+
+- `TrueForAll<T>(T[], Predicate<T>)`: [确定数组中的每个元素是否都与指定谓词定义的条件匹配。](csharp笔记-402-4数组移除及其他方法.md#数组的其他方法)
+[官方文档](https://learn.microsoft.com/zh-cn/dotnet/api/system.array.trueforall?view=net-6.0#system-array-trueforall-1(-0()-system-predicate((-0))))
+- `GetType()`: 获取当前实例的 `Type`。(继承自 `Object`)
+- `GetHashCode()`: 作为默认哈希函数。(继承自 `Object`)
+- `GetLowerBound(Int32)`: 获取数组中指定维度第一个元素的索引。
+- `GetUpperBound(Int32)`: 获取数组中指定维度最后一个元素的索引。
+
 
 (End)

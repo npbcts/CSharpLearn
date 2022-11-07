@@ -5,6 +5,30 @@
 - 已安装 [C# 扩展](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) 的 Visual Studio Code。 
 - [.NET 6 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/6.0)。
 
+### ubuntu22.04安装 `.NET6`
+
+安装 `SDK`
+`.NET SDK` 使你可以通过 `.NET` 开发应用。 如果安装 `.NET SDK`，则无需安装相应的运行时。 若要安装 `.NET SDK`，请运行以下命令：
+
+bash命令:
+```Bash
+sudo apt-get update && \
+  sudo apt-get install -y dotnet6
+```
+安装运行时
+通过 `ASP.NET Core` 运行时，可以运行使用 `.NET` 开发且未提供运行时的应用。 以下命令将安装 `ASP.NET Core` 运行时，这是与 `.NET` 最兼容的运行时。 在终端中，运行以下命令：
+
+bash命令:
+```Bash
+sudo apt-get update && \
+  sudo apt-get install -y aspnetcore-runtime-6.0
+```
+作为 `ASP.NET Core` 运行时的一种替代方法，你可以安装不包含 `ASP.NET Core` 支持的 `.NET` 运行时：将上一命令中的 `aspnetcore-runtime-6.0` 替换为 `dotnet-runtime-6.0`：
+
+bash命令:
+```Bash
+sudo apt-get install -y dotnet-runtime-6.0
+```
 
 ### 创建一个名为“HelloWorld”的 .NET 控制台应用项目。
 

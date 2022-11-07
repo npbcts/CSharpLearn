@@ -48,24 +48,16 @@ Console.WriteLine($"搜索到数组项目最后符合的索引: {Array.LastIndex
 ```
 ### `Find`系列方法
 
-- `Find<T>(T[], Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的第一个匹配元素。
-- `FindAll<T>(T[], Predicate<T>)`: 	
-检索与指定谓词定义的条件匹配的所有元素。
-- `FindIndex<T>(T[], Int32, Int32, Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的一个元素，并返回 Array 中从指定的索引开始、包含指定元素个数的元素范围内第一个匹配项的从零开始的索引。
-- `FindIndex<T>(T[], Int32, Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的元素，并返回 Array 中从指定索引到最后一个元素的元素范围内第一个匹配项的从零开始的索引。
-- `FindIndex<T>(T[], Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中第一个匹配元素的从零开始的索引。
-- `FindLast<T>(T[], Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的最后一个匹配元素。
-- `FindLastIndex<T>(T[], Int32, Int32, Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内最后一个匹配项的从零开始的索引。
-- `FindLastIndex<T>(T[], Int32, Predicate<T>)`: 	
-搜索与由指定谓词定义的条件相匹配的元素，并返回 Array 中从第一个元素到指定索引的元素范围内最后一个匹配项的从零开始的索引。
-- `FindLastIndex<T>(T[], Predicate<T>)`: 	
-搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中最后一个匹配元素的从零开始的索引。
+- `Find<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的第一个匹配元素。
+- `Exists<T>(T[], Predicate<T>)`: 确定指定数组包含的元素是否与指定谓词定义的条件匹配。
+- `FindAll<T>(T[], Predicate<T>)`: 检索与指定谓词定义的条件匹配的所有元素。
+- `FindIndex<T>(T[], Int32, Int32, Predicate<T>)`: 	搜索与指定谓词所定义的条件相匹配的一个元素，并返回 Array 中从指定的索引开始、包含指定元素个数的元素范围内第一个匹配项的从零开始的索引。
+- `FindIndex<T>(T[], Int32, Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回 Array 中从指定索引到最后一个元素的元素范围内第一个匹配项的从零开始的索引。
+- `FindIndex<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中第一个匹配元素的从零开始的索引。
+- `FindLast<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中的最后一个匹配元素。
+- `FindLastIndex<T>(T[], Int32, Int32, Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回 Array 中包含指定元素个数、到指定索引结束的元素范围内最后一个匹配项的从零开始的索引。
+- `FindLastIndex<T>(T[], Int32, Predicate<T>)`: 搜索与由指定谓词定义的条件相匹配的元素，并返回 Array 中从第一个元素到指定索引的元素范围内最后一个匹配项的从零开始的索引。
+- `FindLastIndex<T>(T[], Predicate<T>)`: 搜索与指定谓词所定义的条件相匹配的元素，并返回整个 Array 中最后一个匹配元素的从零开始的索引。
 
 
 使用 `Find<T>(T[], Predicate<T>)`和`FindAll<T>(T[], Predicate<T>)`的例子:
@@ -91,7 +83,8 @@ studentsStartB Blue
 */
 ```
 例子中搜索 `Predicate<T>` 条件使用了 `lambda` 表达式 `stu => stu.StartsWith("B")` 返回以 `B`开头的字符串。
-`Find<T>(T[], Predicate<T>)` 方法的多个重载方法让我们可以结合搜索范围、返回值的位置(开始还是结束位置)进行搜索，或者可以返回索引位置。
+`Find<T>(T[], Predicate<T>)` 方法的多个重载方法让我们可以结合搜索范围、返回值的位置(开始还是结束位置)进行搜索，或者可以返回索引位置。  
+`Exists<T>(T[], Predicate<T>)`的用法与`Find<T>(T[], Predicate<T>)` 类似。
 
 ### `GetValue`系列方法
 
