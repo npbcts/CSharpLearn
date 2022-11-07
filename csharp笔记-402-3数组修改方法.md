@@ -11,7 +11,7 @@ C#中的数组类型是从抽象的基类型 `Array` 派生的引用类型。因
 
 修改数组的方法设计: 数组的排序，反转，设置值。下面的修改数组的方法都会对原数组进行修改。
 
-### 数组的反转
+### 数组的反转`Reverse`
 
 - `Reverse(Array)`: 反转整个一维 Array 中元素的顺序。
 - `Reverse(Array, Int32, Int32)`: 反转一维 Array 中元素子集的顺序。
@@ -72,7 +72,7 @@ public class TestReverse
 }
 ```
 
-### 为数组设置值
+### 为数组设置值 `SetValue`
 
 - `SetValue(Object, Int32)`: 将值设置为一维 Array 中指定位置的元素。 索引指定为 32 位整数。
 - `SetValue(Object, Int32, Int32)`: 将某值设置给二维 Array 中指定位置的元素。 索引指定为 32 位整数。
@@ -104,7 +104,7 @@ public class TestSetValue
 }
 ```
 
-### 数组排序
+### 数组排序 `Sort`
 
 - `Sort(Array)`: 使用 Array 中每个元素的 IComparable 实现，对整个一维 Array 中的元素进行排序。
 - `Sort(Array, Array)`: 基于第一个 Array 中的关键字，使用每个关键字的 IComparable 实现，对两个一维 Array 对象（一个包含关键字，另一个包含对应的项）进行排序。
@@ -173,7 +173,7 @@ public class TestSort
 }
 ```
 
-### 改变数组的大小
+### 改变数组的大小 `Resize`
 
 `Resize<T>(T[], Int32)`： 将一维数组的元素数更改为指定的新大小。
 
