@@ -17,6 +17,7 @@
 
 程序入口类中添加列表数据，并声明 `Contacts`，作为对 `XAML` 界面的数据源。
 ```c#
+// C#
 public sealed partial class MainWindow : Window
 {
     public MainWindow()
@@ -35,6 +36,7 @@ public sealed partial class MainWindow : Window
 
 创建在`ListView`中显示的数据类:
 ```c#
+// C#
 public class Contact
     {
         public string FirstName { get; private set; }
@@ -62,6 +64,7 @@ public class Contact
 
 在这里，`ItemsSource` 绑定到名为 `Contacts` 的公共属性，该属性公开页面的专用数据收集，该集合名为 `_contacts`。
 ```XML
+<!--XAML-->
 <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
     <Button x:Name="myButton" Click="myButton_Click">替换内容</Button>
@@ -85,6 +88,7 @@ public class Contact
 
 修改数据按照 `Contacts`的方法完成，下面是增加数据的例子：
 ```c#
+// C#
 private void myButton_Click(object sender, RoutedEventArgs e)
 {
     Contacts.Add(new Contact("Dff33", "666", "Contoso, LTD."));
@@ -98,6 +102,7 @@ private void myButton_Click(object sender, RoutedEventArgs e)
 
 清空现有`ListView`的方法 ->  即`Contacts`的方法
 ```c#
+// C#
 Contacts.Clear();
 ```
 
