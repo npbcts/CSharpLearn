@@ -1,0 +1,80 @@
+﻿<Window x:Class="WpfApptest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApptest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="400">
+    <Grid >
+        <StackPanel x:Name="CalculationGrid"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center">
+            <TextBox x:Name="FirstNumberBox"
+                     Text="0"
+                     Width="200"
+                     FontFamily="Consolas"
+                     TextAlignment="Center"
+                     HorizontalAlignment="Center" 
+                     TextChanged="FirstNumberBox_TextChanged"/>
+
+        
+
+            <StackPanel Margin="10" HorizontalAlignment="Center">
+                <RadioButton Content="加" 
+                             IsChecked="True" 
+                             GroupName="MathOperator"
+                             Checked="RadioButton_Checked"></RadioButton>
+
+                <RadioButton Content="减" 
+                             GroupName="MathOperator"
+                             Checked="RadioButton_Checked"></RadioButton>
+            
+            
+                <RadioButton Content="乘" 
+                             GroupName="MathOperator"
+                             Checked="RadioButton_Checked"></RadioButton>
+            
+                <RadioButton Content="除" 
+                             GroupName="MathOperator"
+                             Checked="RadioButton_Checked"></RadioButton>
+            
+            
+            </StackPanel>
+
+            <TextBlock Text="使用滑动条设置第二个数字" HorizontalAlignment="Center"></TextBlock>
+
+            <TextBox x:Name="SecondNumberBox"
+                     Text="0"
+                     Width="200"
+                     IsReadOnly="True"
+                     FontFamily="Consolas"
+                     TextAlignment="Center"
+                     HorizontalAlignment="Center"
+                     TextChanged="SecondNumberBox_TextChanged"></TextBox>
+
+            <Slider x:Name="SecondNumberSlider"
+                    Minimum="-10"
+                    Maximum="10"
+                    TickFrequency="0.1"
+                    Width="200"
+                    Margin="0,5,0,10"
+                    ValueChanged="SecondNumberSlider_ValueChanged"></Slider>
+
+
+
+            <Button x:Name="Calculate"
+                    Width="200"
+                    Content="计算"
+                    Margin="0,10"
+                    Click="Calculate_Click"></Button>
+
+            <TextBlock x:Name="ResultTextBlock"
+                       FontSize="20"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       Text="计算结果"></TextBlock>
+        </StackPanel>
+
+    </Grid>
+</Window>
