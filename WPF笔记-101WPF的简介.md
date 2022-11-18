@@ -62,7 +62,7 @@ Windows Presentation Foundation (WPF) 是一个可创建桌面客户端应用程
 ```
 实际上这种布局产生了要素之间的父子关系。 `Rectangle` 元素是 `Grid` 的子元素，`Grid` 又是 `Window` 的子元素。矩形是不超出 `Grid` 范围进入 Window 的白色区域的。 
 
-#### `Grid`行列的创建元素的另一种赋值方式
+#### `Grid`行列的创建元素的另一种赋值方式: 属性标签
 
 `Grid` 是一种网格型的布局控件，任何子元素都可以布局或坐落在制定好的格子之上。另外，网格的特殊属性，可自动调整 `Grid` 的子元素的大小和位置。  可以说`Grid`非常灵活且功能强大的布局控件。网格的建立是通过使用 `Grid.RowDefinitions` 和 `Grid.ColumnDefinitons` 这两个`Grid`属性声明完成的。
 
@@ -77,8 +77,8 @@ Windows Presentation Foundation (WPF) 是一个可创建桌面客户端应用程
     </Grid>
 </Window>
 ```
-可以看到，在`<Grid.RowDefinitions>`的属性标签内有两行`<RowDefinition />`，这是为元素属性赋值的另一种方式，**将属性值写在属性标签内**。同时这种方法也适合一个属性设置多个值。
-
+可以看到，在`<Grid.RowDefinitions>`的属性标签内有两行`<RowDefinition />`，这是为元素属性赋值的另一种方式，**将属性值写在属性标签内**。同时这种方法也适合一个属性设置多个值。  
+属性标签的书写格式是`对象类型.属性名`。  
 设置`<Grid.RowDefinitions>`属性后，将`Grid`分为两行。使用`<Grid.ColumnDefinitions>`可以创建列。
 
 #### `Grid`添加其他元素

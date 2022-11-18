@@ -119,5 +119,10 @@
 - 将`“FontFamily”`设置为`“Arial”`
 
 
+### 属性的另一种赋值方式: [资源](https://learn.microsoft.com/zh-cn/dotnet/desktop/wpf/advanced/resources-wpf?view=netframeworkdesktop-4.8)
+
+
+
+
 (End)
 
