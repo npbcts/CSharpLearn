@@ -5,50 +5,47 @@
 """
 import re
 import os
+from typing import List, Dict
 
+# 纳入目录的文件格式应为 字母+数字+文件名
 
-section_dic = {0:'前言', 1: '一', 2: '二', 3: '三', 4: '四', 5: '五', 6: '六', 7: '七', 8: '八', 9:'九'}
 
 def save_text(text, filename, mode='a', encoding='utf-8'):
     with open(filename, mode=mode, encoding=encoding) as f:
         f.write(text)
         f.close()
 
+
+def parser_filename(filename: str, index: int, practic_folder: Dict[str, List[str]]):
+    # 这里通过函数修改了practic_folder可变数据类型，而不是返回值
+    chapter_index_tmp = re.findall(r'\d', filename)
+    chapter_part_tmp = re.match(r'^[a-zA-Z]*', filename)
+    if chapter_index_tmp and chapter_part_tmp:
+        chapter_index = chapter_index_tmp[0]
+        chapter_part = chapter_part_tmp[0]
+        chapter_text = f"{chapter_index}. [{filename.split('.')[0]}]({filename})  \n"
+        practic_folder.setdefault(chapter_part, []).append(chapter_text)
+
+
 def content(content_name):
     files = os.listdir('.')
     files.sort()
     index = 0
-    session_index = 0
-    practic_folder = []
+    practic_folder = {}
     for file in files:
-        chapter_index = re.findall(r'\d', file)
-        if chapter_index:
-            if file.startswith('csharp'):
-                session_index_tmp = int(chapter_index[0])
-                if session_index != session_index_tmp:
-                    session_index = session_index_tmp
-                    content_str = f'\n\n### 第{section_dic.get(session_index)}部分\n'
-                    save_text(content_str, content_name)
-                
-                index += 1
-                chapter_text = f"{index}. [{file.split('.')[0]}]({file})  \n"
-                save_text(chapter_text, content_name)
-            else:
-                practic_folder.append(file)
-        
-    # 添加练习程序文件夹目录
-    save_text('\n\n### 练习程序列表\n', content_name)
-    if practic_folder:
-        for index, file in enumerate(practic_folder):
-            save_text( f'{index+1}. [{file}]({file})\n', content_name)
+        parser_filename(file, index, practic_folder)
 
+    if practic_folder:
+        for key, value in practic_folder.items():
+            value.sort()
+            save_text(f'\n\n### {key} 部分\n', content_name)
+            for index, file in enumerate(value):
+                save_text(file, content_name)
 
 
 if __name__ == '__main__':
     content_name = 'csharp笔记-000目录.md'
     if os.path.exists(content_name):
         os.remove(content_name)
-    save_text('## CSharpLearn笔记目录\n', content_name)
-    save_text('\n\n### 前言部分\n', content_name)
     content(content_name)
     print('目录生成成功!')
