@@ -16,20 +16,24 @@ def save_text(text, filename, mode='a', encoding='utf-8'):
         f.close()
 
 
+def make_content(chapter_index: int, filename: str):
+    return f"{chapter_index}. [{filename.split('.')[0]}]({filename})  \n"
+
+
 def parser_filename(filename: str, index: int, practic_folder: Dict[str, List[str]]):
     # 这里通过函数修改了practic_folder可变数据类型，而不是返回值
     chapter_index_tmp = re.findall(r'\d', filename)
-    chapter_part_tmp = re.match(r'^[a-zA-Z]*', filename)
+    chapter_part_tmp = re.match(r'^[a-zA-Z]+', filename)
     if chapter_index_tmp and chapter_part_tmp:
         chapter_index = chapter_index_tmp[0]
         chapter_part = chapter_part_tmp[0]
-        chapter_text = f"{chapter_index}. [{filename.split('.')[0]}]({filename})  \n"
+        chapter_text = make_content(chapter_index, filename)
         practic_folder.setdefault(chapter_part, []).append(chapter_text)
 
 
 def content(content_name):
     files = os.listdir('.')
-    files.sort()
+    files.append(content_name)
     index = 0
     practic_folder = {}
     for file in files:
@@ -44,7 +48,7 @@ def content(content_name):
 
 
 if __name__ == '__main__':
-    content_name = 'csharp笔记-000目录.md'
+    content_name = 'A笔记-000目录.md'
     if os.path.exists(content_name):
         os.remove(content_name)
     content(content_name)
