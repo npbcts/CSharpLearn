@@ -203,7 +203,7 @@ internal class MockOrderServices : IOrderServices
 }
 ```
 
-#### 创建`ViewModel`并设计暴漏的数据 
+#### 创建`ViewModel`并设计暴露的数据 
 
 拓展`Dish`类，是至保存菜品信息的`Dish`类增加是否选中的属性，同时为这个新增属性增加双向通信能力。
 ```c#
@@ -235,7 +235,7 @@ internal class DishMenuItemViewModel: NotificationObject
 }
 ```
 
-根据界面要求，我们需要在`ViewModel`类中公开的数据类有`Count`,`Restaurant`,`DishMenu`,   公开的事件有,``,`PlaceOrderCommand`,`SelectMenuItemCommand`。
+根据界面要求，我们需要在`ViewModel`类中公开的数据类有`Count`,`Restaurant`,`DishMenu`,   公开的事件有,`PlaceOrderCommand`,`SelectMenuItemCommand`。
 
 `MainWindowViewModel`类:
 ```c#

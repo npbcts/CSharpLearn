@@ -17,6 +17,7 @@ def save_text(text, filename, mode='a', encoding='utf-8'):
 
 
 def make_content(chapter_index: int, filename: str):
+    # chapter_index = 1
     return f"{chapter_index}. [{filename.split('.')[0]}]({filename})  \n"
 
 
