@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AsyncTest (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "AsyncTest (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

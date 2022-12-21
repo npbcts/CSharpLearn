@@ -1,0 +1,34 @@
+﻿<!-- Copyright (c) Microsoft Corporation and Contributors. -->
+<!-- Licensed under the MIT License. -->
+
+<Window
+    x:Class="AsyncTest.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AsyncTest"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Button x:Name="SyncDownload" Width="800" Click="SyncDownload_Click" 
+                Background="Yellow" >SyncDownload(非异步下载)</Button>
+        
+        <Button x:Name="ASyncDownload" Width="800" Click="ASyncDownload_Click" 
+                Background="Aquamarine" Margin="0,10,0,10">MultiASyncDownload(多线程+多线程,即多线程同时开启多线程)</Button>
+        
+        <Button x:Name="AllAsyncDownload" Width="800" Click="AllAsyncDownload_Click" 
+                Background="BlueViolet" Margin="0,10,0,10">AllAsyncDownload(多线程+异步,多线程自己异步下载)</Button>
+        
+        <Button x:Name="SingleASyncDownload" Width="800" Click="SingleASyncDownload_Click" 
+                Background="SeaGreen" Margin="0,10,0,10">SingleASyncDownload(单循环+多线程->顺序多线程)</Button>
+        
+        <Button x:Name="ClearText" Width="800" Click="ClearText_Click" 
+                Background="Red" Margin="0,10,0,10">ClearText(清除文本)</Button>
+
+        <TextBox x:Name="Result" Width="800" Height="500" TextWrapping="Wrap"
+                 VerticalAlignment="Stretch"></TextBox>
+    </StackPanel>
+    
+    
+</Window>
