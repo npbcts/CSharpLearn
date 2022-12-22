@@ -103,7 +103,13 @@ public class CookMession
         return new Toast();
     }
 
-
+    public static async Task<Toast> ToastBreadApplyJamAndApplyButterAsync(int slices)
+    {
+        Toast toastTmp = await ToastBreadAsync(slices);
+        ApplyJam(toastTmp);
+        ApplyButter(toastTmp);
+        return toastTmp;
+    }
 
 
     //================= 煎蛋 ==============================
