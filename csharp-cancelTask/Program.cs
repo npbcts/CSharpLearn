@@ -89,3 +89,19 @@ public class Program
     }
 
 }
+
+// Unhandled exception. System.Threading.Tasks.TaskCanceledException: The operation was canceled.
+//  ---> System.IO.IOException: Unable to read data from the transport connection: Operation canceled.
+//  ---> System.Net.Sockets.SocketException (125): Operation canceled
+//    --- End of inner exception stack trace ---
+//    at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
+//    at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
+//    at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
+//    at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+//    --- End of inner exception stack trace ---
+//    at System.Net.Http.HttpClient.HandleFailure(Exception e, Boolean telemetryStarted, HttpResponseMessage response, CancellationTokenSource cts, CancellationToken cancellationToken, CancellationTokenSource pendingRequestsCts)
+//    at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
+//    at Program.ProcessUrlAsync(String url, HttpClient client, CancellationToken token) in /home/clark/git/CSharpLearn/csharp-cancelTask/Program.cs:line 86
+//    at Program.SumPageSizeAsync() in /home/clark/git/CSharpLearn/csharp-cancelTask/Program.cs:line 74
+//    at Program.Main() in /home/clark/git/CSharpLearn/csharp-cancelTask/Program.cs:line 30
+//    at Program.<Main>()
