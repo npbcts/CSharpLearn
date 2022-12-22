@@ -79,18 +79,18 @@ public sealed partial class MainWindow : Window
     }
 
 
-    //===================== 单循环异步下载方法 ================================
+    //===================== 单循环多线程下载方法 ================================
     /// <summary>
-    /// 单循环异步下载方法for loop中使用异步方法；虽然将线程分出主线程，但由于循环的存在，下载时间同非异步方法相近
+    /// 单循环多线程下载方法for loop中使用异步方法；虽然将线程分出主线程，但由于循环的存在，下载时间同非异步方法相近
     /// 顺序开启多线程
     /// </summary>
     /// <param name="sender"></param>
     /// <param name="e"></param>
-    private async void SingleASyncDownload_Click(object sender, RoutedEventArgs e)
+    private async void SingleMulitThreadDownload_Click(object sender, RoutedEventArgs e)
     {
         Result.Text = "";
         var stopwatch = Stopwatch.StartNew();
-        await DownloadWebsitesSingleAsync();
+        await DownloadWebsitesSingleMulitThreadAsync();
         Result.Text += $"共耗费时间 : {stopwatch.Elapsed}{Environment.NewLine}";
     }
 
@@ -98,7 +98,7 @@ public sealed partial class MainWindow : Window
     /// 单循环的异步下载，底层使用同步方法
     /// </summary>
     /// <returns></returns>
-    private async Task DownloadWebsitesSingleAsync()
+    private async Task DownloadWebsitesSingleMulitThreadAsync()
     {
         foreach (var item in Contents.WebSites)
         {
@@ -137,7 +137,7 @@ public sealed partial class MainWindow : Window
             downloadWebsitesTasks.Add( Task.Run(()=> DownloadWebsiteSync(item)));  
         }
 
-        var results = await Task.WhenAll(downloadWebsitesTasks);
+        var results = await Task.WhenAll(downloadWebsitesTasks); //同时开启多个线程
 
         foreach (var result in results)
         {
@@ -163,7 +163,7 @@ public sealed partial class MainWindow : Window
             downloadWebsitesTasks.Add( DownloadWebsiteAsync(item));  
         }
 
-        var results = await Task.WhenAll(downloadWebsitesTasks);
+        var results = await Task.WhenAll(downloadWebsitesTasks);  //全部任务完成后，的返回结果是每个任务返回结果的列表
 
         foreach (var result in results)
         {
@@ -191,6 +191,37 @@ public sealed partial class MainWindow : Window
         var stopwatch = Stopwatch.StartNew();
         await DownloadWebsitesAllAsync();
         Result.Text += $"共耗费时间 : {stopwatch.Elapsed}{Environment.NewLine}";
+    }
+
+
+
+    //===================== 单循环多线程下载方法 ================================
+    /// <summary>
+    /// 单循环多线程下载方法for loop中使用异步方法；虽然将线程分出主线程，但由于循环的存在，下载时间同非异步方法相近
+    /// 顺序开启多线程
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    private async void SingleASyncDownload_Click(object sender, RoutedEventArgs e)
+    {
+        Result.Text = "";
+        var stopwatch = Stopwatch.StartNew();
+        await DownloadWebsitesSingleAsync();
+        Result.Text += $"共耗费时间 : {stopwatch.Elapsed}{Environment.NewLine}";
+    }
+
+    /// <summary>
+    /// 单循环的异步下载，底层使用同步方法
+    /// </summary>
+    /// <returns></returns>
+    private async Task DownloadWebsitesSingleAsync()
+    {
+        foreach (var item in Contents.WebSites)
+        {
+            //Task.Run开线程，类似于异步操作；但开一个线程耗费资源。
+            var result = await  DownloadWebsiteAsync(item);
+            ReportResult(result);
+        }
     }
 
 

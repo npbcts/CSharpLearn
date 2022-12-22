@@ -19,10 +19,13 @@
         
         <Button x:Name="AllAsyncDownload" Width="800" Click="AllAsyncDownload_Click" 
                 Background="BlueViolet" Margin="0,10,0,10">AllAsyncDownload(多线程+异步,多线程自己异步下载)</Button>
-        
+
+        <Button x:Name="SingleMulitThreadDownload" Width="800" Click="SingleMulitThreadDownload_Click" 
+                Background="SeaGreen" Margin="0,10,0,10">SingleMulitThreadDownload(单循环+多线程->顺序多线程)</Button>
+
         <Button x:Name="SingleASyncDownload" Width="800" Click="SingleASyncDownload_Click" 
-                Background="SeaGreen" Margin="0,10,0,10">SingleASyncDownload(单循环+多线程->顺序多线程)</Button>
-        
+                Background="SeaGreen" Margin="0,10,0,10">SingleASyncDownload(单循环+异步->顺序多线程)</Button>
+
         <Button x:Name="ClearText" Width="800" Click="ClearText_Click" 
                 Background="Red" Margin="0,10,0,10">ClearText(清除文本)</Button>
 
