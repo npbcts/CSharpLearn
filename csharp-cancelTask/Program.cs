@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 public class Program
 {
-    //linux平台会出现 Unhandled exception
     static async Task Main()
     {
         Console.WriteLine("程序开始......");
@@ -15,20 +14,22 @@ public class Program
         Console.WriteLine(cancelText);
         Task cancelTask = Task.Run( ()=>
         {
-            while(Console.ReadKey().Key != ConsoleKey.Enter)
-            {
+            //结束循环后，才能执行s_cts.Cancel方法。while判断的时候成立，才能结束循环。
+            while(Console.ReadKey().Key != ConsoleKey.End)
+            {   
                 Console.WriteLine(cancelText);
             }
+            // while(true){}
             Console.WriteLine("已按下回车键，取消任务");
             s_cts.Cancel();
         }
         );
 
-    Task sumPageSizeTask = SumPageSizeAsync();
+        Task sumPageSizeTask = SumPageSizeAsync();
 
-    await Task.WhenAll(new[] {cancelTask, sumPageSizeTask});
+        await Task.WhenAny(new[] {cancelTask, sumPageSizeTask});
 
-    Console.WriteLine("程序结束......");
+        Console.WriteLine("程序结束......");
 
 
     }
@@ -71,9 +72,10 @@ public class Program
         foreach(string url in s_urlList)
         {
             int contentLength = await ProcessUrlAsync(url, s_client, s_cts.Token);
+            //如果任务取消，则后面的程序不被执行
             total += contentLength;
         }
-
+        
         stopwatch.Stop();
         Console.WriteLine($"\n总共返回页面大小(bytes): {total: #.#}");
         Console.WriteLine($"程序耗费时间:            {stopwatch.Elapsed}\n");
@@ -90,18 +92,4 @@ public class Program
 
 }
 
-// Unhandled exception. System.Threading.Tasks.TaskCanceledException: The operation was canceled.
-//  ---> System.IO.IOException: Unable to read data from the transport connection: Operation canceled.
-//  ---> System.Net.Sockets.SocketException (125): Operation canceled
-//    --- End of inner exception stack trace ---
-//    at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource<System.Int32>.GetResult(Int16 token)
-//    at System.Net.Security.SslStream.EnsureFullTlsFrameAsync[TIOAdapter](TIOAdapter adapter)
-//    at System.Net.Security.SslStream.ReadAsyncInternal[TIOAdapter](TIOAdapter adapter, Memory`1 buffer)
-//    at System.Net.Http.HttpConnection.SendAsyncCore(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
-//    --- End of inner exception stack trace ---
-//    at System.Net.Http.HttpClient.HandleFailure(Exception e, Boolean telemetryStarted, HttpResponseMessage response, CancellationTokenSource cts, CancellationToken cancellationToken, CancellationTokenSource pendingRequestsCts)
-//    at System.Net.Http.HttpClient.<SendAsync>g__Core|83_0(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationTokenSource cts, Boolean disposeCts, CancellationTokenSource pendingRequestsCts, CancellationToken originalCancellationToken)
-//    at Program.ProcessUrlAsync(String url, HttpClient client, CancellationToken token) in /home/clark/git/CSharpLearn/csharp-cancelTask/Program.cs:line 86
-//    at Program.SumPageSizeAsync() in /home/clark/git/CSharpLearn/csharp-cancelTask/Program.cs:line 74
-//    at Program.Main() in /home/clark/git/CSharpLearn/csharp-cancelTask/Program.cs:line 30
-//    at Program.<Main>()
+
