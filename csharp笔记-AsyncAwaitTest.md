@@ -67,7 +67,7 @@ void DoIndependentWork()
 2. 方法声明中的返回类型
     - 方法体中的 `return` 类型为 `TResult`
     - 不返回值的方法 (即同步方法中的 `void`)直接使用 `Task`,即不接泛型；
-    - `void`: 异步事件处理程序，例如界面的 `Click`等相应事件不使用`Task`
+    - `void`: 异步事件处理程序，例如界面的 `Click`等响应事件不使用`Task`
     - 具有 GetAwaiter 方法的任何其他类型。
 
 3. 方法体中至少包含一个 `await`表达式：该表达式标记一个点，在该点上，直到等待的异步操作完成方法才能继续。 同时，将方法挂起，并且控件返回到方法的调用方。 
@@ -89,17 +89,17 @@ void DoIndependentWork()
 
 2. `GetUrlContentLengthAsync` 可创建 `HttpClient` 实例并调用 `GetStringAsync `异步方法以下载网站内容作为字符串。
 
-3. `GetStringAsync` 中发生了某种情况，该情况挂起了它的进程。 可能必须等待网站下载或一些其他阻止活动。 为避免阻止资源，**`GetStringAsync` 会将控制权出让给其调用方 `GetUrlContentLengthAsync`**。  
+3. `GetStringAsync` 中发生了某种情况(如网络延迟)，该情况挂起了它的进程。 可能必须等待网站下载或一些其他阻止活动。 为避免阻止资源，**`GetStringAsync` 会将控制权出让给其调用方 `GetUrlContentLengthAsync`**。  
 
-    `GetStringAsync` 返回 `Task<TResult>`，其中 `TResult` 为字符串，并且 `GetUrlContentLengthAsync` 将任务分配给 `getStringTask` 变量。 **该任务表示调用 `GetStringAsync` 的正在进行的进程**，其中承诺当工作完成时产生实际字符串值。(因此，将方法执行，并分配给`Task`类型的变量之时，方法就开始执行了。)
+    `GetStringAsync` 返回 `Task<TResult>`，其中 `TResult` 为字符串，并且 `GetUrlContentLengthAsync` 将任务分配给 `getStringTask` 变量。 **该任务表示调用 `GetStringAsync` 的正在进行的进程**，其中承诺当工作完成时产生实际字符串值。(因此，将方法执行并分配给`Task`类型的变量之时，方法就开始执行了。)
 
-4. 由于尚未等待 `getStringTask`，因此，`GetUrlContentLengthAsync` 可以继续执行不依赖于 `GetStringAsync` 得出的最终结果的其他工作。 该任务由对同步方法 `DoIndependentWork` 的调用表示。
+4. 由于尚未`await` `getStringTask`(即没有询问完成结果)，因此，`GetUrlContentLengthAsync` 可以继续执行不依赖于 `GetStringAsync` 得出的最终结果的其他工作。 该任务由对同步方法 `DoIndependentWork` 的调用表示。
 
 5. `DoIndependentWork `是完成其工作并返回其调用方的同步方法。
 
 6. `GetUrlContentLengthAsync` 已运行完毕，可以不受 `getStringTask` 的结果影响。 接下来，`GetUrlContentLengthAsync` 需要计算并返回已下载的字符串的长度，但该方法只有在获得字符串的情况下才能计算该值。 
 
-    因此，`GetUrlContentLengthAsync` 使用一个 `await` 运算符来挂起其进度，并把控制权交给调用 `GetUrlContentLengthAsync` 的方法。 `GetUrlContentLengthAsync` 将 `Task<int>` 返回给调用方。 该任务表示对产生下载字符串长度的整数结果的一个承诺。
+    因此，`GetUrlContentLengthAsync` 使用一个 `await` 运算符来挂起其进度，并把控制权交给调用 `GetUrlContentLengthAsync` 的方法。 `GetUrlContentLengthAsync` 将 `Task<int>` 返回给调用方。 该任务表示对产生下载字符串长度的整数结果的一个承诺。(即示例方法`GetUrlContentLengthAsync`的调用方也使用`Task` + `await`语句时，在外部形成的等待过程。)
 
     > 如果 `GetStringAsync`（因此 `getStringTask`）在 `GetUrlContentLengthAsync` 等待前完成(`DoIndependentWork`前已经完成)，则控制会保留在 `GetUrlContentLengthAsync` 中。 如果异步调用过程 `getStringTask` 已完成，并且 `GetUrlContentLengthAsync` 不必等待最终结果，则挂起然后返回到 `GetUrlContentLengthAsync` 将造成成本浪费。
 
@@ -109,7 +109,7 @@ void DoIndependentWork()
     在(外部)调用方法中，处理模式会继续。 在等待结果前，调用方可以开展不依赖于 `GetUrlContentLengthAsync` 结果的其他工作，否则就需等待片刻。 调用方法等待 `GetUrlContentLengthAsync`，而 `GetUrlContentLengthAsync` 等待 `GetStringAsync`。
 
 
-7. `GetStringAsync` 完成并生成一个字符串结果。 字符串结果不是通过按你预期的方式调用 `GetStringAsync` 所返回的。 （记住，该方法已返回步骤 3 中的一个任务）。相反，字符串结果存储在表示 `getStringTask` 方法完成的任务中。 **`await` 运算符从 `getStringTask` 中检索结果**。 赋值语句将检索到的结果赋给 `contents`。(因此`await`表示"等等，我看看`Task`任务结果完成了没有，其他任务暂停"的意思。)
+7. `GetStringAsync` 完成并生成一个字符串结果。 字符串结果不是通过按你预期的方式调用 `GetStringAsync` 所返回的。 （记住，该方法已返回步骤 3 中的一个任务）。相反，字符串结果存储在表示 `getStringTask` 方法完成的任务中。 **`await` 运算符从 `getStringTask` 中检索结果**。 赋值语句将检索到的结果赋给 `contents`。(因此`await`表示"等等，我看看`Task`任务结果完成了没有，其他任务暂停"的意思;直到结果返回后，我将返回结果，并继续开启其他任务。)
 
 8. 当 `GetUrlContentLengthAsync` 具有字符串结果时，该方法可以计算字符串长度。 然后，`GetUrlContentLengthAsync` 工作也将完成，并且等待事件处理程序可继续使用。 
 
