@@ -12,6 +12,7 @@ public class Program
         Console.WriteLine("程序开始......");
         string cancelText = "按 \"Enter\" 键 取消任务......";
         Console.WriteLine(cancelText);
+        //新建线程检测某个值
         Task cancelTask = Task.Run( ()=>
         {
             //结束循环后，才能执行s_cts.Cancel方法。while判断的时候成立，才能结束循环。
