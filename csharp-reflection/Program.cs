@@ -5,8 +5,14 @@ using System.Reflection;
 
 class  BaseClass
 {
+    public BaseClass()
+    {
+        BaseFiled3 = 22;
+    }
+
     public int BaseFiled = 2;
     public int BaseFiledTwo = 300;
+    public int BaseFiled3 {get;set;}
 }
 
 class DerivedClass: BaseClass
@@ -39,8 +45,12 @@ class Program
 
         // 根据属性名获取属性值
         Type t = ab.GetType();
-        var x = t.GetField("BaseFiledTwo").GetValue(ab);
-        Console.WriteLine($" value: {x} type: {x.GetType()}");
+        // var x = t.GetField("BaseFiledTwo").GetValue(ab);
+        // Console.WriteLine($" value: {x} type: {x.GetType()}");
+        Console.WriteLine($"未知类的属性信息  {t.GetField("err")}");
+        Console.WriteLine($"类的属性信息 {t.GetProperty("BaseFiled3")}");
+        Console.WriteLine($"类的属性信息获取类的实例的值 {t.GetProperty("BaseFiled3").GetValue(ab)}");
+        Console.WriteLine($"类的属性信息获取属性的数据类型 {t.GetProperty("BaseFiled3").PropertyType}");
 
 
 
